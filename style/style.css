@@ -1,22 +1,107 @@
+* {
+  padding: 0px;
+  margin: 0px;
+  box-sizing: border-box;
+}
+
+.wrapper-main {
+  padding: 20px;
+  height: 100vh;
+  background: radial-gradient(
+    circle,
+    rgba(132, 102, 201, 0.9559174011401436) 0%,
+    rgba(82, 67, 94, 1) 94%
+  );
+  background-position: center;
+  background-repeat: no-repeat;
+}
+
+#form {
+  width: 300px;
+  height: 100px;
+  padding: 10px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  border-radius: 10px;
+  border: 3px solid rgba(132, 131, 197, 0.932);
+  background: radial-gradient(
+    circle,
+    rgba(123, 122, 153, 0.267) 0%,
+    rgba(132, 131, 197, 0.37) 100%
+  );
+}
+
+#inputTitle {
+  width: 200px;
+  border-radius: 5px;
+  margin-bottom: 5px;
+}
+
+#inputDescription {
+  width: 200px;
+  border-radius: 5px;
+  margin-bottom: 5px;
+}
+
 .wrapper-data {
   display: flex;
   column-gap: 10px;
 }
 
 #todo {
-  width: 400px;
+  width: 300px;
   padding: 1rem;
-  border: 2px solid red;
+  border-radius: 10px;
+  border: 3px solid rgba(132, 131, 197, 0.932);
+  background: radial-gradient(
+    circle,
+    rgba(123, 122, 153, 0.267) 0%,
+    rgba(132, 131, 197, 0.37) 100%
+  );
 }
 
 #inProgress {
-  width: 400px;
+  width: 300px;
   padding: 1rem;
-  border: 2px solid rgb(114, 5, 5);
+  border-radius: 10px;
+  border: 3px solid rgba(132, 131, 197, 0.932);
+  background: radial-gradient(
+    circle,
+    rgba(123, 122, 153, 0.267) 0%,
+    rgba(132, 131, 197, 0.37) 100%
+  );
+}
+
+#done {
+  width: 300px;
+  padding: 1rem;
+  border-radius: 10px;
+  border: 3px solid rgba(132, 131, 197, 0.932);
+  background: radial-gradient(
+    circle,
+    rgba(123, 122, 153, 0.267) 0%,
+    rgba(132, 131, 197, 0.37) 100%
+  );
+}
+
+#deleted {
+  width: 300px;
+  padding: 1rem;
+  border-radius: 10px;
+  border: 3px solid rgba(132, 131, 197, 0.932);
+  background: radial-gradient(
+    circle,
+    rgba(123, 122, 153, 0.267) 0%,
+    rgba(132, 131, 197, 0.37) 100%
+  );
 }
 
 .card {
-  border: 1px solid plum;
+  padding: 1rem;
+  border-radius: 10px;
+  border: 2px solid plum;
 }
 
 .wrapper {
@@ -31,7 +116,7 @@
   right: 0;
   width: 100%;
   height: 100vh;
-  background-color: rgba(241, 133, 241, 0.267);
+  background-color: rgba(64, 57, 82, 0.623);
   display: flex;
   justify-content: center;
   align-items: center;
@@ -42,13 +127,18 @@
   width: 500px;
   height: 400px;
   padding: 1rem;
-  border: 3px solid rgb(112, 77, 112);
-  border-radius: 5px;
+  border-radius: 10px;
+  border: 3px solid rgba(132, 131, 197, 0.932);
+  background: radial-gradient(
+    circle,
+    rgba(123, 122, 153, 0.267) 0%,
+    rgba(132, 131, 197, 0.37) 100%
+  );
 }
 
 .roundBtn {
   position: absolute;
-  padding: 5px;
+  padding: 3px;
   border-radius: 50%;
   top: 1rem;
   right: 1rem;

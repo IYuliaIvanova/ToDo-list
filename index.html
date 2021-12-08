@@ -8,33 +8,47 @@
     <title>Document</title>
   </head>
   <body>
-    <form id="form" action="" style="margin-bottom: 2rem">
-      <input type="text" id="inputTitle" placeholder="title" />
-      <input type="text" id="inputDescription" placeholder="description" />
-      <button id="addCardButton">Add card</button>
-    </form>
+    <section class="wrapper-main">
+      <form id="form" action="" style="margin-bottom: 2rem">
+        <input type="text" id="inputTitle" placeholder="Title" />
+        <input type="text" id="inputDescription" placeholder="Description" />
+        <button id="addCardButton">Add card</button>
+      </form>
 
-    <div class="wrapper-data">
-      <div class="todoList">
-        <div id="todo"></div>
-      </div>
+      <div class="wrapper-data">
+        <div class="todoList">
+          <p>ToDo</p>
+          <div class="dataSection" id="todo"></div>
+        </div>
 
-      <div class="inProgressList">
-        <div id="inProgress"></div>
-      </div>
-    </div>
+        <div class="inProgressList">
+          <p>InProgress</p>
+          <div class="dataSection" id="inProgress"></div>
+        </div>
 
-    <div class="wrapper">
-      <div class="modal-wrapper">
-        <div class="modal">
-          <button class="roundBtn" id="closeBtn">X</button>
-          <input id="modalTitle" type="text" />
-          <input id="modalDescription" type="text" />
-          <button id="submitBtn">Submit</button>
+        <div class="doneList">
+          <p>Done</p>
+          <div class="dataSection" id="done"></div>
+        </div>
+
+        <div class="deletedList">
+          <p>Deleted</p>
+          <div id="deleted"></div>
         </div>
       </div>
-    </div>
 
-    <script src="js/script.js"></script>
+      <div class="wrapper">
+        <div class="modal-wrapper">
+          <div class="modal">
+            <button class="roundBtn" id="closeBtn">X</button>
+            <input id="modalTitle" type="text" />
+            <input id="modalDescription" type="text" />
+            <button id="submitBtn">Submit</button>
+          </div>
+        </div>
+      </div>
+
+      <script src="js/script.js"></script>
+    </section>
   </body>
 </html>
