@@ -18,7 +18,6 @@
 
 #form {
   width: 300px;
-  height: 100px;
   padding: 10px;
   display: flex;
   flex-direction: column;
@@ -33,21 +32,42 @@
   );
 }
 
-#inputTitle {
-  width: 200px;
-  border-radius: 5px;
-  margin-bottom: 5px;
+p,
+span,
+label {
+  color: white;
+  font-size: 20px;
 }
 
-#inputDescription {
+#inputTitle,
+#inputDescription,
+#modalTitle,
+#modalDescription {
   width: 200px;
   border-radius: 5px;
-  margin-bottom: 5px;
+  margin-bottom: 10px;
+  color: rgb(63, 62, 65);
+  font-size: 20px;
+}
+
+#addCardButton,
+#editBtn {
+  display: inline-block;
+  text-decoration: none;
+  text-align: center;
+  width: 100px;
+  border-radius: 5px;
+  color: #fff;
+  font-weight: bold;
+  background: rgba(132, 131, 197, 0.932);
+  cursor: pointer;
 }
 
 .wrapper-data {
   display: flex;
   column-gap: 10px;
+  row-gap: 20px;
+  flex-wrap: wrap;
 }
 
 #todo {
@@ -98,10 +118,20 @@
   );
 }
 
+.container-deleteAll {
+  display: flex;
+  justify-content: space-between;
+}
+
 .card {
   padding: 1rem;
   border-radius: 10px;
   border: 2px solid plum;
+  margin-bottom: 5px;
+}
+
+.card:last-child {
+  margin-bottom: 0;
 }
 
 .wrapper {
@@ -123,6 +153,9 @@
 }
 
 .modal {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
   position: relative;
   width: 500px;
   height: 400px;
@@ -137,9 +170,79 @@
 }
 
 .roundBtn {
+  width: 20px;
+  height: 20px;
   position: absolute;
-  padding: 3px;
-  border-radius: 50%;
   top: 1rem;
   right: 1rem;
+  background-image: url("../img/times-solid.svg");
+  background-position: center;
+  background-size: cover;
+  background-repeat: no-repeat;
+  cursor: pointer;
+}
+
+.wrapper-cardBtn {
+  padding: 10px;
+  display: flex;
+  column-gap: 30px;
+}
+
+.editBtn {
+  width: 20px;
+  height: 20px;
+  background-image: url("../img/pencil-alt-solid.svg");
+  background-position: center;
+  background-size: cover;
+  background-repeat: no-repeat;
+  cursor: pointer;
+}
+
+.deleteBtn {
+  width: 20px;
+  height: 20px;
+  background-image: url("../img/trash-alt-solid.svg");
+  background-position: center;
+  background-size: cover;
+  background-repeat: no-repeat;
+  cursor: pointer;
+}
+
+.nextBtn {
+  width: 20px;
+  height: 20px;
+  background-image: url("../img/share-solid.svg");
+  background-position: center;
+  background-size: cover;
+  background-repeat: no-repeat;
+  cursor: pointer;
+}
+
+.restoreBtn {
+  width: 20px;
+  height: 20px;
+  background-image: url("../img/reply-all-solid.svg");
+  background-position: center;
+  background-size: cover;
+  background-repeat: no-repeat;
+  cursor: pointer;
+}
+
+.deletedAllBtn {
+  position: relative;
+  width: 20px;
+  height: 20px;
+  background-image: url("../img/trash-alt-solid.svg");
+  background-position: center;
+  background-size: cover;
+  background-repeat: no-repeat;
+  cursor: pointer;
+}
+
+.deletedAllBtn::after {
+  content: "All";
+  position: absolute;
+  right: 25px;
+  color: white;
+  font-size: 20px;
 }

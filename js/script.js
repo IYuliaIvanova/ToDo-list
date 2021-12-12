@@ -1,3 +1,17 @@
+const commonVariable = (eventTarget, data) => {
+  const card = eventTarget.closest(".card");
+  const cardId = +card.id;
+  const listSection = card.closest(".dataSection");
+  const listId = card.closest(".dataSection").id;
+
+  const deletedCard = data[listId].filter((card) => card.id === cardId)[0];
+  const deletedCardIndex = data[listId].findIndex(
+    (card) => card.id === deletedCard.id
+  );
+
+  return { listSection, listId, deletedCard, deletedCardIndex };
+};
+
 const drawList = (dataType, section) => {
   section.innerHTML = "";
 
@@ -10,32 +24,57 @@ const drawList = (dataType, section) => {
       <span>Description:</span>
       <span class="description">${item.description}</span>
       <br/>
-      <div>
+      <div class="wrapper-cardBtn">
       ${
         section.id === "todo" || section.id === "inProgress"
-          ? ` <button class="editBtn">Edit</button>
-            <button class="deleteBtn">Delete</button>
-            <button class="nextBtn">Next</button>
+          ? ` 
+            <div class="editBtn"></div>
+            <div class="deleteBtn"></div>
+            <div class="nextBtn"></div>
           </div>`
           : section.id === "done"
-          ? ` <button class="editBtn">Edit</button>
-            <button class="deleteBtn">Delete</button>
+          ? ` <div class="editBtn"></div>
+            <div class="deleteBtn"></div>
           </div>`
-          : `</div>`
+          : `<div class="restoreBtn"></div></div>`
       }</div>`;
   });
 };
 
-const deleteCard = (dataType, dataDelete, idCard, title, description) => {
-  dataType.forEach((item, i) => {
-    if (Number(item.id) === Number(idCard)) {
-      dataDelete.push({ id: idCard, title: title, description: description });
-      dataType.splice(i, 1);
-    }
+const createCard = (data, todoSection) => {
+  const form = document.querySelector("#form");
+  const inputTitle = document.querySelector("#inputTitle");
+  const inputDescription = document.querySelector("#inputDescription");
+
+  data.todo.push({
+    id: Date.now(),
+    title: inputTitle.value,
+    description: inputDescription.value,
   });
+
+  form.reset();
+  drawList(data.todo, todoSection);
 };
 
-const editCard = (dataType, idCard, title, description, section) => {
+const deleteCard = (eventTarget, data, deleteSection) => {
+  const { listSection, listId, deletedCard, deletedCardIndex } = commonVariable(
+    eventTarget,
+    data
+  );
+
+  data.deleted.push(deletedCard);
+  data[listId].splice(deletedCardIndex, 1);
+
+  drawList(data[listId], listSection);
+  drawList(data.deleted, deleteSection);
+};
+
+const editCard = (eventTarget, data) => {
+  const { listSection, listId, deletedCard, deletedCardIndex } = commonVariable(
+    eventTarget,
+    data
+  );
+
   const modalWrapper = document.querySelector(".wrapper");
   modalWrapper.style.display = "block";
 
@@ -44,58 +83,71 @@ const editCard = (dataType, idCard, title, description, section) => {
     modalWrapper.style.display = "none";
   });
 
-  const submitBtn = document.querySelector("#submitBtn");
+  const editBtn = document.querySelector("#editBtn");
   const modalTitle = document.querySelector("#modalTitle");
   const modalDescription = document.querySelector("#modalDescription");
 
-  modalTitle.value = title;
-  modalDescription.value = description;
+  modalTitle.value = deletedCard.title;
+  modalDescription.value = deletedCard.description;
 
-  submitBtn.addEventListener("click", () => {
-    dataType.forEach((item, i) => {
-      if (Number(item.id) === Number(idCard)) {
-        dataType.splice(i, 1, {
-          id: idCard,
-          title: modalTitle.value,
-          description: modalDescription.value,
-        });
-      }
-      modalWrapper.style.display = "none";
+  const edit = (event) => {
+    event.preventDefault();
+    data[listId].splice(deletedCardIndex, 1, {
+      id: deletedCard.id,
+      title: modalTitle.value,
+      description: modalDescription.value,
     });
-    drawList(dataType, section);
-  });
+
+    editBtn.removeEventListener("click", edit); //удаление события
+    modalWrapper.style.display = "none";
+    drawList(data[listId], listSection);
+  };
+
+  editBtn.addEventListener("click", edit);
 };
 
-const nextCard = (
-  dataTypePush,
-  dataTypeSplice,
-  card,
-  section,
-  idCard,
-  title,
-  description
-) => {
-  dataTypePush.push({ id: idCard, title: title, description: description });
-  drawList(dataTypePush, section);
+const nextCard = (eventTarget, data) => {
+  const { listSection, listId, deletedCard, deletedCardIndex } = commonVariable(
+    eventTarget,
+    data
+  );
 
-  card.remove();
-  dataTypeSplice.forEach((item, i) => {
-    if (Number(item.id) === Number(idCard)) {
-      dataTypeSplice.splice(i, 1);
-    }
-  });
+  const nextListIndex = Object.keys(data).findIndex((id) => id === listId) + 1;
+
+  const nextSection = document.querySelector(
+    `#${Object.keys(data)[nextListIndex]}`
+  );
+
+  data[Object.keys(data)[nextListIndex]].push(deletedCard);
+  data[listId].splice(deletedCardIndex, 1);
+
+  drawList(data[listId], listSection);
+  drawList(data[Object.keys(data)[nextListIndex]], nextSection);
+};
+
+const restoreCard = (eventTarget, data, todoSection, deleteSection) => {
+  const { listSection, listId, deletedCard, deletedCardIndex } = commonVariable(
+    eventTarget,
+    data
+  );
+
+  data.todo.push(deletedCard);
+  data.deleted.splice(deletedCardIndex, 1);
+
+  drawList(data.deleted, deleteSection);
+  drawList(data.todo, todoSection);
+};
+
+const deleteAllCard = (data, deleteSection) => {
+  data.deleted = [];
+  drawList(data.deleted, deleteSection);
 };
 
 const init = () => {
-  const wrapperData = document.querySelector(".wrapper-data");
-  const todoList = document.querySelector(".todoList");
-  const inputTitle = document.querySelector("#inputTitle");
-  const inputDescription = document.querySelector("#inputDescription");
-  const addCardButton = document.querySelector("#addCardButton");
-  const form = document.querySelector("#form");
   const todoSection = document.querySelector("#todo");
-  const inProgressSection = document.querySelector("#inProgress");
   const deleteSection = document.querySelector("#deleted");
+  const wrapperData = document.querySelector(".wrapper-data");
+  const addCardButton = document.querySelector("#addCardButton");
 
   const data = {
     todo: [],
@@ -106,61 +158,29 @@ const init = () => {
 
   addCardButton.addEventListener("click", (event) => {
     event.preventDefault(); //прерываение обновления формы по умолчанию !!! только с формой работает !!!
-
-    data.todo.push({
-      id: Date.now(),
-      title: inputTitle.value,
-      description: inputDescription.value,
-    });
-
-    form.reset();
-    drawList(data.todo, todoSection);
+    createCard(data, todoSection);
   });
 
   wrapperData.addEventListener("click", (event) => {
-    const card = event.target.closest(".card");
-    const title = card.querySelector(".title").textContent;
-    const description = card.querySelector(".description").textContent;
-
-    let cardSection = card.closest(".dataSection");
-    let idCard = card.id;
-    let idNext;
-
-    switch (event.target.classList.value) {
-      case "deleteBtn":
-        deleteCard(
-          data[cardSection.id],
-          data.deleted,
-          idCard,
-          title,
-          description
-        );
-        drawList(data[cardSection.id], cardSection);
-        drawList(data.deleted, deleteSection);
+    switch (true) {
+      case [...event.target.classList].includes("deleteBtn"): // из коллекции классов получаем массив и ищем нужный
+        deleteCard(event.target, data, deleteSection);
         break;
 
-      case "editBtn":
-        editCard(data[cardSection.id], idCard, title, description, cardSection);
+      case [...event.target.classList].includes("editBtn"):
+        editCard(event.target, data);
         break;
 
-      case "nextBtn":
-        for (let i = 0; i < Object.keys(data).length; i++) {
-          if (Object.keys(data)[i] === cardSection.id) {
-            i += 1;
-            idNext = Object.keys(data)[i];
-          }
-        }
-        let nextSection = document.getElementById(idNext);
+      case [...event.target.classList].includes("nextBtn"):
+        nextCard(event.target, data);
+        break;
 
-        nextCard(
-          data[idNext],
-          data[cardSection.id],
-          card,
-          nextSection,
-          idCard,
-          title,
-          description
-        );
+      case [...event.target.classList].includes("restoreBtn"):
+        restoreCard(event.target, data, todoSection, deleteSection);
+        break;
+
+      case [...event.target.classList].includes("deletedAllBtn"):
+        deleteAllCard(data, deleteSection);
         break;
 
       default:

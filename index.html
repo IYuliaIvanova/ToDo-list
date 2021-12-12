@@ -32,18 +32,23 @@
         </div>
 
         <div class="deletedList">
-          <p>Deleted</p>
-          <div id="deleted"></div>
+          <div class="container-deleteAll">
+            <p>Deleted</p>
+            <div class="deletedAllBtn"></div>
+          </div>
+          <div class="dataSection" id="deleted"></div>
         </div>
       </div>
 
       <div class="wrapper">
         <div class="modal-wrapper">
           <div class="modal">
-            <button class="roundBtn" id="closeBtn">X</button>
+            <div class="roundBtn" id="closeBtn"></div>
+            <label for="modalTitle">Title</label>
             <input id="modalTitle" type="text" />
+            <label for="modalDescription">Description</label>
             <input id="modalDescription" type="text" />
-            <button id="submitBtn">Submit</button>
+            <button id="editBtn">Edit</button>
           </div>
         </div>
       </div>
