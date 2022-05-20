@@ -7,11 +7,6 @@
 .wrapper-main {
   padding: 20px;
   height: 100vh;
-  background: radial-gradient(
-    circle,
-    rgba(132, 102, 201, 0.9559174011401436) 0%,
-    rgba(82, 67, 94, 1) 94%
-  );
   background-position: center;
   background-repeat: no-repeat;
 }
@@ -27,15 +22,15 @@
   border: 3px solid rgba(132, 131, 197, 0.932);
   background: radial-gradient(
     circle,
-    rgba(123, 122, 153, 0.267) 0%,
-    rgba(132, 131, 197, 0.37) 100%
+    rgba(120, 100, 166, 0.456) 0%,
+    rgba(93, 93, 159, 0.553) 100%
   );
 }
 
 p,
 span,
 label {
-  color: white;
+  color: rgb(0, 0, 0);
   font-size: 20px;
 }
 
@@ -77,8 +72,8 @@ label {
   border: 3px solid rgba(132, 131, 197, 0.932);
   background: radial-gradient(
     circle,
-    rgba(123, 122, 153, 0.267) 0%,
-    rgba(132, 131, 197, 0.37) 100%
+    rgba(53, 52, 87, 0.267) 0%,
+    rgba(49, 48, 111, 0.37) 100%
   );
 }
 
@@ -89,8 +84,8 @@ label {
   border: 3px solid rgba(132, 131, 197, 0.932);
   background: radial-gradient(
     circle,
-    rgba(123, 122, 153, 0.267) 0%,
-    rgba(132, 131, 197, 0.37) 100%
+    rgba(53, 52, 87, 0.267) 0%,
+    rgba(49, 48, 111, 0.37) 100%
   );
 }
 
@@ -101,8 +96,8 @@ label {
   border: 3px solid rgba(132, 131, 197, 0.932);
   background: radial-gradient(
     circle,
-    rgba(123, 122, 153, 0.267) 0%,
-    rgba(132, 131, 197, 0.37) 100%
+    rgba(53, 52, 87, 0.267) 0%,
+    rgba(49, 48, 111, 0.37) 100%
   );
 }
 
@@ -113,8 +108,8 @@ label {
   border: 3px solid rgba(132, 131, 197, 0.932);
   background: radial-gradient(
     circle,
-    rgba(123, 122, 153, 0.267) 0%,
-    rgba(132, 131, 197, 0.37) 100%
+    rgba(53, 52, 87, 0.267) 0%,
+    rgba(49, 48, 111, 0.37) 100%
   );
 }
 
@@ -126,7 +121,7 @@ label {
 .card {
   padding: 1rem;
   border-radius: 10px;
-  border: 2px solid plum;
+  border: 2px solid rgb(168, 116, 168);
   margin-bottom: 5px;
 }
 
@@ -158,13 +153,13 @@ label {
   align-items: center;
   position: relative;
   width: 500px;
-  height: 400px;
+  height: 200px;
   padding: 1rem;
   border-radius: 10px;
-  border: 3px solid rgba(132, 131, 197, 0.932);
+  border: 3px solid rgba(114, 113, 179, 0.932);
   background: radial-gradient(
     circle,
-    rgba(123, 122, 153, 0.267) 0%,
+    rgba(149, 148, 180, 0.267) 0%,
     rgba(132, 131, 197, 0.37) 100%
   );
 }
@@ -243,6 +238,6 @@ label {
   content: "All";
   position: absolute;
   right: 25px;
-  color: white;
+  color: rgb(76, 55, 94);
   font-size: 20px;
 }
